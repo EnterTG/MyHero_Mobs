@@ -1,0 +1,11 @@
+#name, main, version and api are required
+name: MyHero
+main: Core.MyHeroMain
+version: "0.1"
+api: ["1.0.5"]
+author: WindSkill
+description: Plugin MyHero for Nukkit
+commands:
+  MyHeroMobs:
+    description: MyHero Mobs
+    aliases: [mh,mhm]
