@@ -15,6 +15,7 @@ public class MobManager
 {
 	public static HashMap<String,MobOption> Mobs = new HashMap<>();
 	
+	@SuppressWarnings("unchecked")
 	public static void Load()
 	{
 		File MobFileRoot = new File(MyHeroMain.Main.getDataFolder() + "/Mobs/");

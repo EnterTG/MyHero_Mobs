@@ -1,23 +1,24 @@
 package AIMove;
 
-import Core.MyHeroMain;
-import MobAIInterface.Move;
 import MobManager.MyHeroMob;
-import cn.nukkit.Nukkit;
+import StateMachine.State;
+import StateMachine.StateMachineCore;
+import StateMachine.Triggers;
 
-import java.util.logging.Logger;
-
-public class MobWalkingAI implements Move
+public class MobWalkingAI implements State
 {
 	private MyHeroMob Entity;
-	public MobWalkingAI(MyHeroMob MyHeroMob)
+	private StateMachineCore Machine;
+	
+	private final int FollowDistance = 15;
+	public MobWalkingAI(MyHeroMob entity,StateMachineCore machinecore)
 	{
-		Entity = MyHeroMob;
+		Machine = machinecore;
+		Entity = entity;
 	}
-	@Override
 	public void Move()
 	{
-		if(Entity.getTarget() != null)
+	/*	if(Entity.getTarget() != null)
 		{
 		
 		}
@@ -26,10 +27,44 @@ public class MobWalkingAI implements Move
 			//Entity.x += 1;
 			MyHeroMain.Main.getLogger().info("My pos" + Entity.getLocation());
 		}
-		
+		*/
 		//Move();
 	}
+
+	@Override
+	public void Execute() {
+		// TODO Auto-generated method stub
+		if(!targetInRange())
+			return;
+		if(HandlePath())
+			return;
+		
+	}
 	
+	public boolean targetInRange()
+	{
+		if(Entity.getTarget().getLocation().distance(Entity.getLocation()) > FollowDistance)
+		{
+			Machine.Fire(Triggers.TargerLost);
+			return false;
+		}
+		else
+			return true;
+	}
+	
+	public boolean HandlePath()
+	{
+		if(Entity.getTarget() != null)
+		{
+			
+			return false;
+		}
+		else
+		{
+			Machine.Fire(Triggers.TargetDead);
+			return true;
+		}
+	}
 	
 	
 }

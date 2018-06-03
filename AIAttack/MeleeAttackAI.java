@@ -1,34 +1,35 @@
 package AIAttack;
 
-import MobAIInterface.Attack;
+
 import MobManager.MyHeroMob;
+import StateMachine.State;
+import StateMachine.StateMachineCore;
+import StateMachine.Triggers;
 import cn.nukkit.Server;
 import cn.nukkit.event.entity.EntityDamageByEntityEvent;
 import cn.nukkit.event.entity.EntityDamageEvent;
 import cn.nukkit.network.protocol.EntityEventPacket;
 
-public class MeleeAttackAI implements Attack
+public class MeleeAttackAI implements State
 {
 	private MyHeroMob Entity;
-	private int AtackDelay = 0;
-	public MeleeAttackAI(MyHeroMob MyHeroMob)
-	{
-		Entity = MyHeroMob;
-	}
+	private StateMachineCore Machine;
+
 	
-	@Override
-	public void Tick()
+	public MeleeAttackAI(MyHeroMob entity,StateMachineCore machinecore)
 	{
-		AtackDelay += 1;
+		Machine = machinecore;
+		Entity = entity;
 	}
-	
-	@Override
+
 	public void onAttack()
 	{
 		/*EntityDamageByEntityEvent DamageEvent = new EntityDamageByEntityEvent(Entity,Entity.getTarget(), EntityDamageEvent.DamageCause.ENTITY_ATTACK,Entity.getDamage());
 		MyHeroMain.Main.getServer().getPluginManager().callEvent(DamageEvent);*/
-		AtackDelay = 0;
-		Entity.getTarget().attack(new EntityDamageByEntityEvent(Entity,Entity.getTarget(), EntityDamageEvent.DamageCause.ENTITY_ATTACK,Entity.getDamage()));
+		Entity._AtackDelay = 0;
+		Entity.getTarget()
+		.attack(new EntityDamageByEntityEvent
+				(Entity,Entity.getTarget(), EntityDamageEvent.DamageCause.ENTITY_ATTACK,Entity.getDamage()));
 		EntityEventPacket pk = new EntityEventPacket();
 		pk.eid = Entity.getTarget().getId();
 		pk.event = 2;
@@ -39,10 +40,10 @@ public class MeleeAttackAI implements Attack
 	
 	
 	
-	@Override
+
 	public boolean canAttack()
 	{
-		if(AtackDelay > 10 && Entity.getTarget() != null)
+		if(Entity._AtackDelay > 10 && Entity.getTarget() != null)
 			if(Entity.getLocation().distance(Entity.getTarget().getLocation()) <= 1.25)
 				return true;
 			
@@ -50,6 +51,17 @@ public class MeleeAttackAI implements Attack
 				return false;
 		else
 			return false;
+		
+	}
+
+
+	@Override
+	public void Execute() {
+		if(canAttack())
+			return;
+		else
+			Machine.Fire(Triggers.TargetEscape);
+		
 	}
 	
 }
