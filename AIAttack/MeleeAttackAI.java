@@ -58,9 +58,10 @@ public class MeleeAttackAI implements State
 	@Override
 	public void Execute() {
 		if(canAttack())
-			return;
+			onAttack();
 		else
-			Machine.Fire(Triggers.TargetEscape);
+			Machine.Fire(Triggers.TargetNotInRange);
+		
 		
 	}
 	

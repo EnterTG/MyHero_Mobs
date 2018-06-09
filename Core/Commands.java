@@ -1,21 +1,24 @@
 package Core;
 
 import ItemManager.ItemStackManager;
-import MobManager.MobManager;
 import cn.nukkit.Player;
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandExecutor;
 import cn.nukkit.command.CommandSender;
-
-import java.io.IOException;
 
 public class Commands implements CommandExecutor
 {
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
 	{
+		MyHeroMain.Main.getLogger().info("Komenda");
 		if(args.length > 0)
-			switch (args[0]) {
+			switch (args[0]) 
+			{
+				case "mobs":
+					MyHeroMain.Main.getLogger().info("Mob stworzony");
+					//MobManager.Mobs.get("Test1").getSource().SpawnEntity(((Player)sender).getLevel(),((Player)sender).getLocation());
+					break;
 				case "items":
 					if(args.length > 1)
 					{
@@ -27,8 +30,7 @@ public class Commands implements CommandExecutor
 								sender.sendMessage(LangManager.Prefix);
 					}
 					break;
-				case "mobs":
-					MobManager.Mobs.get("Test1").getSource().SpawnEntity(((Player)sender).getLevel(),((Player)sender).getLocation());
+				
 			}
 		return true;
 	}

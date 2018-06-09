@@ -2,15 +2,12 @@ package ItemManager;
 
 import cn.nukkit.item.Item;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class ItemStackConstructor implements AbstractItemStackOption
 {
-	private Item Item;
+	private Item i;
 	public ItemStackConstructor(int Id)
 	{
-		this.Item = Item.get(Id);
+		this.i = Item.get(Id);
 	}
 	
 	@Override
@@ -21,7 +18,7 @@ public class ItemStackConstructor implements AbstractItemStackOption
 	@Override
 	public Item getItem()
 	{
-		return this.Item;
+		return this.i;
 	}
 	
 }

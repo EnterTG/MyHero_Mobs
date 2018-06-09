@@ -23,7 +23,7 @@ public class MobTargetSelector implements State
 	
 	public boolean  FindTarget()
 	{
-		Map<Integer,Player > PlayersViewers = Entity.getViewers();
+		Map<Integer,Player> PlayersViewers = Entity.getViewers();
 		double CloserPlayerDistance = 11;//= Collections.min(PlayersViewers.keySet());
 		int KeyPlayer = -1;
 		Location EntityLocation = Entity.getLocation();

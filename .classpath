@@ -2,6 +2,6 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path=""/>
-	<classpathentry kind="lib" path="D:/pobrane/nukkit-1.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="D:/nukkit/nukkit-1.0-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>

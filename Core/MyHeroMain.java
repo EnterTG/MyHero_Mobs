@@ -1,35 +1,35 @@
 package Core;
 
-import ItemManager.AbstractItemStackOption;
-import ItemManager.ItemStackManager;
-import MobManager.MobManager;
-import cn.nukkit.Player;
-import cn.nukkit.command.Command;
-import cn.nukkit.command.CommandSender;
-import cn.nukkit.command.PluginCommand;
-import MobManager.MobOption;
-import cn.nukkit.event.EventHandler;
-import cn.nukkit.event.Listener;
-import cn.nukkit.event.inventory.InventoryOpenEvent;
-import cn.nukkit.event.player.PlayerJoinEvent;
-import cn.nukkit.plugin.PluginBase;
-
 import java.io.File;
 import java.io.IOException;
-
-
-
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Map;
 
+import ItemManager.AbstractItemStackOption;
+import ItemManager.ItemStackManager;
+import MobManager.MobManager;
+import MobManager.MobOption;
+import cn.nukkit.Player;
+import cn.nukkit.command.Command;
+import cn.nukkit.command.CommandSender;
+import cn.nukkit.event.EventHandler;
+import cn.nukkit.event.Listener;
+import cn.nukkit.event.inventory.InventoryOpenEvent;
+import cn.nukkit.event.player.PlayerJoinEvent;
+import cn.nukkit.plugin.PluginBase;
+import cn.nukkit.scheduler.AsyncWorker;
+
 public class MyHeroMain extends PluginBase implements Listener
 {
-	public static PluginBase Main;
+	public static MyHeroMain Main;
 	
 	private String NamePlugin = "MyHero Plugin for Nukkit";
 	private double Version = 0.1;
+	
+	public MobManager mobmanager;
+	
 	
 	@Override
 	public void onEnable()
@@ -60,7 +60,12 @@ public class MyHeroMain extends PluginBase implements Listener
 			e.printStackTrace();
 		}
 		MyHeroMain.Main = this;
+		mobmanager = new MobManager();
 		LoaderManager.LoadAll();
+		this.getServer().getScheduler().scheduleRepeatingTask(Main, mobmanager, 1,true);
+		//mobmanager.runTaskTimerAsynchronously(Main, delay, period).runTaskAsynchronously(Main);
+		//AsyncWorker MobsCalculations = new AsyncWorker();
+		//this.getServer().getScheduler().scheduleTask(mobmanager);
 		
 		//Commands
 		//PluginCommand main = (PluginCommand ) this.getServer().getPluginCommand("MyHeroMobs");
@@ -127,7 +132,9 @@ public class MyHeroMain extends PluginBase implements Listener
 					}
 					break;
 				case "mobs":
-					MobManager.Mobs.get("Test3").getSource().SpawnEntity(((Player)sender).getLevel(),((Player)sender).getLocation());
+					MobManager.Mobs.get("Test1").getRoot().SpawnEntity(((Player)sender).getLocation());
+					MyHeroMain.Main.getLogger().info("Mob stworzony");
+					
 					break;
 				case "pokaz":
 					for(Map.Entry<String, MobOption > Mob : MobManager.Mobs.entrySet())

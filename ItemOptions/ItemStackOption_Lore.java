@@ -1,13 +1,11 @@
 package ItemOptions;
 
-import ItemManager.AbstractItemStackOption;
-import ItemManager.ItemStackOption;
-import cn.nukkit.item.Item;
-import cn.nukkit.utils.TextFormat;
-
-import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
+
+import ItemManager.AbstractItemStackOption;
+import ItemManager.ItemStackOption;
+import cn.nukkit.utils.TextFormat;
 
 public class ItemStackOption_Lore extends ItemStackOption
 {
@@ -16,11 +14,12 @@ public class ItemStackOption_Lore extends ItemStackOption
 		super(itemStackOption);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void addItemStackOption(Object... value)
 	{
 		List<String> Lore =(List<String> ) value[0];
-		for ( ListIterator i = Lore.listIterator(); i.hasNext(); )
+		for ( ListIterator<String> i = Lore.listIterator(); i.hasNext(); )
 		{
 			i.set(TextFormat.colorize((String)i.next()));
 		}

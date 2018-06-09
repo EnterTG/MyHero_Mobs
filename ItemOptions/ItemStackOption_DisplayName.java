@@ -2,7 +2,6 @@ package ItemOptions;
 
 import ItemManager.AbstractItemStackOption;
 import ItemManager.ItemStackOption;
-import cn.nukkit.item.Item;
 import cn.nukkit.utils.TextFormat;
 
 public class ItemStackOption_DisplayName extends ItemStackOption

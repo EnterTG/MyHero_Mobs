@@ -1,12 +1,5 @@
 package ItemManager;
 
-import Core.LangManager;
-import Core.MyHeroMain;
-import MobManager.*;
-import cn.nukkit.item.Item;
-import cn.nukkit.utils.TextFormat;
-import org.yaml.snakeyaml.Yaml;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,10 +7,16 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.yaml.snakeyaml.Yaml;
+
+import Core.LangManager;
+import Core.MyHeroMain;
+
 public class ItemStackManager
 {
 	public static HashMap<String,AbstractItemStackOption> ItemList = new HashMap<>();
 	
+	@SuppressWarnings("unchecked")
 	public static void LoadItems()
 	{
 		File ItemFileRoot = new File(MyHeroMain.Main.getDataFolder() + "/Items/");

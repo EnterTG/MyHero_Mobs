@@ -4,7 +4,6 @@ import Core.LangManager;
 import Core.MyHeroMain;
 import ItemManager.AbstractItemStackOption;
 import ItemManager.ItemStackOption;
-import cn.nukkit.item.Item;
 
 public class ItemStackOption_Amount extends ItemStackOption
 {
