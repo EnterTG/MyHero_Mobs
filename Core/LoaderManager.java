@@ -1,8 +1,10 @@
 package Core;
 
+import DropManager.DropManager;
 import ItemManager.ItemStackManager;
 import ItemManager.ItemStackOptionManager;
-import MobManager.*;
+import MobManager.MobManager;
+import MobManager.MobOptionManager;
 
 
 
@@ -13,6 +15,7 @@ public class LoaderManager
 		ItemStackOptionManager.Load();
 		ItemStackManager.LoadItems();
 		
+		DropManager.Load();
 		
 		MobOptionManager.Load();
 		MobManager.Load();
@@ -52,5 +55,14 @@ public class LoaderManager
 		}*/
 	}
 	
-	
+	public static void Reload()
+	{
+		ItemStackOptionManager.ListOptions.clear();
+		ItemStackManager.ItemList.clear();
+		DropManager.AllDrops.clear();
+		MobOptionManager.ListOptions.clear();
+		MobManager.Mobs.clear();
+		MobManager.MobsInterface.clear();
+		LoadAll();
+	}
 }

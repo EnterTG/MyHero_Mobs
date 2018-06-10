@@ -7,6 +7,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Map;
 
+import Events.EntityDeathListener;
 import ItemManager.AbstractItemStackOption;
 import ItemManager.ItemStackManager;
 import MobManager.MobManager;
@@ -37,8 +38,9 @@ public class MyHeroMain extends PluginBase implements Listener
 		this.getLogger().info(NamePlugin + " Version: " + Version );
  
 		this.getServer().getPluginManager().registerEvents(this,this);
+		this.getServer().getPluginManager().registerEvents(new EntityDeathListener(), this);
 		//Load Libs
-		try {
+		/*try {
 			final File[] libs = new File[] {
 					new File(getDataFolder(), "jackson-core-asl-1.9.9.jar"),
 					new File(getDataFolder(), "jackson-mapper-asl-1.9.9.jar") };
@@ -58,11 +60,11 @@ public class MyHeroMain extends PluginBase implements Listener
 			}
 		} catch (final Exception e) {
 			e.printStackTrace();
-		}
+		}*/
 		MyHeroMain.Main = this;
-		mobmanager = new MobManager();
+		//mobmanager = new MobManager();
 		LoaderManager.LoadAll();
-		this.getServer().getScheduler().scheduleRepeatingTask(Main, mobmanager, 1,true);
+		//this.getServer().getScheduler().scheduleRepeatingTask(Main, mobmanager, 1,true);
 		//mobmanager.runTaskTimerAsynchronously(Main, delay, period).runTaskAsynchronously(Main);
 		//AsyncWorker MobsCalculations = new AsyncWorker();
 		//this.getServer().getScheduler().scheduleTask(mobmanager);
@@ -145,6 +147,9 @@ public class MyHeroMain extends PluginBase implements Listener
 					{
 						this.getLogger().info("Item == Key: " + Item.getKey() + " Value: " + Item.getValue().getItem().toString());
 					}
+					break;
+				case "reload":
+					LoaderManager.Reload();
 					break;
 			}
 		return true;

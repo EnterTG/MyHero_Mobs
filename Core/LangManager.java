@@ -11,7 +11,8 @@ public class LangManager
 			Item_No_ID = "%Item_Name% do not have ID",
 			Item_ID_Is_Not_Int = "%Item_Name% ID is not number",
 			Item_Error= "%Item_Name% contains error",
-			Item_Amount_Is_Not_Int = "Item amount is not number";
+			Item_Amount_Is_Not_Int = "Item amount is not number",
+			Mob_HP_Is_Not_Int = "Mob hp is not number";
 	
 	
 	

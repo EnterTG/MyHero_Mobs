@@ -5,6 +5,7 @@ version: "0.1"
 api: ["1.0.5"]
 author: WindSkill
 description: Plugin MyHero for Nukkit
+depend: [MobPlugin]
 commands:
   MyHeroMobs:
     description: MyHero Mobs

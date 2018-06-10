@@ -3,5 +3,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path=""/>
 	<classpathentry kind="lib" path="D:/nukkit/nukkit-1.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="D:/nukkit/plugins/MobPlugin.jar"/>
+	<classpathentry kind="src" path="/MobPlugin"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
