@@ -5,6 +5,8 @@ import ItemManager.ItemStackManager;
 import ItemManager.ItemStackOptionManager;
 import MobManager.MobManager;
 import MobManager.MobOptionManager;
+import SpawningMamager.Spawner;
+import SpawningMamager.SpawningManager;
 
 
 
@@ -12,14 +14,30 @@ public class LoaderManager
 {
 	public static void LoadAll()
 	{
-		ItemStackOptionManager.Load();
-		ItemStackManager.LoadItems();
+		/*ItemStackOptionManager.Load();
+		ItemStackManager.LoadItems();*/
 		
 		DropManager.Load();
 		
 		MobOptionManager.Load();
 		MobManager.Load();
 		
+		SpawningManager.Load();
+		
+		
+		MyHeroMain.Main.getServer().getScheduler().scheduleRepeatingTask(MyHeroMain.Main, 
+				new Runnable() 
+				{
+					public void run() 
+					{
+						MyHeroMain.Main.getLogger().info("SpawningMobs");
+						for(Spawner s : SpawningManager.AllSpawners)
+						{
+							s.Spawn();
+						}
+					}
+				}
+		, 100,true);
 		//ObjectMapper mapper = new ObjectMapper();
 		
 		//For testing

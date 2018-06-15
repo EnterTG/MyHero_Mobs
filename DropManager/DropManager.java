@@ -10,6 +10,8 @@ import java.util.Map;
 
 import org.yaml.snakeyaml.Yaml;
 
+import Core.LangManager;
+import Core.LangManager.LangHelper;
 import Core.MyHeroMain;
 import ItemManager.ItemStackManager;
 import cn.nukkit.item.Item;
@@ -18,6 +20,7 @@ public class DropManager {
 
 	public static HashMap<String,Drop> AllDrops = new HashMap<>();
 	
+	@SuppressWarnings("unchecked")
 	public static void Load()
 	{
 		File DropsFileRoot = new File(MyHeroMain.Main.getDataFolder() + "/Drops/");
@@ -94,13 +97,13 @@ public class DropManager {
 											else	
 											{
 												
-												MyHeroMain.Main.getLogger().info("Nioe istnieje");
+												MyHeroMain.Main.getLogger().info(LangManager.Item_Do_Not_Exist.replace("%Item_Name%", ItemStrings[0]));
 												//item nie istnieje
 											}
 										}
 										else
 										{
-											MyHeroMain.Main.getLogger().info("Blad w dropie");
+											MyHeroMain.Main.getLogger().info(LangManager.Drop_Error.replace(LangHelper.DropName.toString(), ItemStrings[0]));
 											//Blad w  dropie
 										}
 										

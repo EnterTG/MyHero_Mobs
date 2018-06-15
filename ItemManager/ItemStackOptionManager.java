@@ -1,10 +1,11 @@
 package ItemManager;
 
+import java.util.HashMap;
+
 import ItemOptions.ItemStackOption_Amount;
 import ItemOptions.ItemStackOption_DisplayName;
+import ItemOptions.ItemStackOption_Enchant;
 import ItemOptions.ItemStackOption_Lore;
-
-import java.util.HashMap;
 
 interface ItemStackOptionInterface
 {
@@ -20,6 +21,7 @@ public class ItemStackOptionManager
 		ListOptions.put("DisplayName", e -> new ItemStackOption_DisplayName(e));
 		ListOptions.put("Lore", e -> new ItemStackOption_Lore(e));
 		ListOptions.put("Amount", e -> new ItemStackOption_Amount(e));
+		ListOptions.put("Enchant", e -> new ItemStackOption_Enchant(e));
 	}
 	
 }

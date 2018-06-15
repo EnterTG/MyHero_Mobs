@@ -1,6 +1,5 @@
 package Core;
 
-import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URL;
@@ -19,8 +18,8 @@ import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.inventory.InventoryOpenEvent;
 import cn.nukkit.event.player.PlayerJoinEvent;
+import cn.nukkit.level.Location;
 import cn.nukkit.plugin.PluginBase;
-import cn.nukkit.scheduler.AsyncWorker;
 
 public class MyHeroMain extends PluginBase implements Listener
 {
@@ -31,6 +30,7 @@ public class MyHeroMain extends PluginBase implements Listener
 	
 	public MobManager mobmanager;
 	
+
 	
 	@Override
 	public void onEnable()
@@ -64,7 +64,7 @@ public class MyHeroMain extends PluginBase implements Listener
 		MyHeroMain.Main = this;
 		//mobmanager = new MobManager();
 		LoaderManager.LoadAll();
-		//this.getServer().getScheduler().scheduleRepeatingTask(Main, mobmanager, 1,true);
+		
 		//mobmanager.runTaskTimerAsynchronously(Main, delay, period).runTaskAsynchronously(Main);
 		//AsyncWorker MobsCalculations = new AsyncWorker();
 		//this.getServer().getScheduler().scheduleTask(mobmanager);

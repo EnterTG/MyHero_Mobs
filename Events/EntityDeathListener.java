@@ -1,6 +1,5 @@
 package Events;
 
-import Core.MyHeroMain;
 import MobManager.MobManager;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
@@ -25,7 +24,6 @@ public class EntityDeathListener implements Listener{
 				w.dropItem(loc, i);
 				//MyHeroMain.Main.getLogger().info("Drop: " + i );
 			}
-			
 			e.setDrops(Drop);
 			
 		}

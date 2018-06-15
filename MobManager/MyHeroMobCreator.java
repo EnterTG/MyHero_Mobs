@@ -4,15 +4,15 @@ package MobManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Stream;
 
-import Core.MyHeroMain;
 import DropManager.DropManager;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.item.Item;
+import cn.nukkit.level.Level;
 import cn.nukkit.level.Location;
+import cn.nukkit.math.Vector3;
 
 public class MyHeroMobCreator implements AbstractMobOption
 {
@@ -43,7 +43,15 @@ public class MyHeroMobCreator implements AbstractMobOption
 		MobManager.AllSpawnedMobs.put(Entity.getId(), this);
 		Entity.spawnToAll();
 	}
-	
+	public void SpawnEntity(Vector3 location,Level l)
+	{
+		Entity = MobManager.MobsInterface.get(getType()).getEntity(l.getChunk(location.getChunkX(), location.getChunkZ()), cn.nukkit.entity.Entity.getDefaultNBT(location));
+		
+		//Entity =  new MyHeroMob(location.getLevel().getChunk(location.getChunkX(), location.getChunkZ()), MyHeroMob.getDefaultNBT(location)); 
+		this.Options.executeMobOption();
+		MobManager.AllSpawnedMobs.put(Entity.getId(), this);
+		Entity.spawnToAll();
+	}
 	
 	public Item[] getDrop()
 	{
