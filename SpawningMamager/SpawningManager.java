@@ -22,13 +22,13 @@ public class SpawningManager {
 	public static List<Spawner> AllSpawners = new ArrayList<Spawner>();
 	public static void Load()
 	{
-		File SpawnFileRoot = new File(MyHeroMain.Main.getDataFolder() + "/Spawners/");
+		File SpawnFileRoot = new File(MyHeroMain.Main.getDataFolder() + "../MyHero/Spawners/");
 		File[] SpawnsFileList = SpawnFileRoot.listFiles();
 		//MyHeroMain.Main.getLogger().info(SpawnFileRoot.getPath());
 		if(SpawnsFileList != null)
 			for(File SpawnsFIle : SpawnsFileList)
 			{
-				//MyHeroMain.Main.getLogger().info(SpawnsFIle.getPath());
+				MyHeroMain.Main.getLogger().info(SpawnsFIle.getPath());
 				if(SpawnsFIle.isFile())
 				{
 					if(SpawnsFIle.getName().contains(".yml"))

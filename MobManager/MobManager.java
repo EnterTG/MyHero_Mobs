@@ -71,7 +71,7 @@ public class MobManager
 	@SuppressWarnings("unchecked")
 	public static void Load()
 	{
-		File MobFileRoot = new File(MyHeroMain.Main.getDataFolder() + "/Mobs/");
+		File MobFileRoot = new File(MyHeroMain.Main.getDataFolder() + "../MyHero/Mobs/");
 		File[] MobsFileList = MobFileRoot.listFiles();
 		//MyHeroMain.Main.getLogger().info(MobFileRoot.getPath());
 		if(MobsFileList != null)

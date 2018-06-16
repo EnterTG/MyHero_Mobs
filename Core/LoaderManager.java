@@ -1,8 +1,6 @@
 package Core;
 
 import DropManager.DropManager;
-import ItemManager.ItemStackManager;
-import ItemManager.ItemStackOptionManager;
 import MobManager.MobManager;
 import MobManager.MobOptionManager;
 import SpawningMamager.Spawner;
@@ -75,8 +73,7 @@ public class LoaderManager
 	
 	public static void Reload()
 	{
-		ItemStackOptionManager.ListOptions.clear();
-		ItemStackManager.ItemList.clear();
+
 		DropManager.AllDrops.clear();
 		MobOptionManager.ListOptions.clear();
 		MobManager.Mobs.clear();

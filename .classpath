@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="D:/nukkit/plugins/MobPlugin.jar"/>
 	<classpathentry kind="src" path="/MobPlugin"/>
 	<classpathentry kind="lib" path="D:/nukkit/plugins/FastAsyncWorldEdit-nukkit-18.03.19-18c7145-1053-19.4.16.jar"/>
+	<classpathentry kind="lib" path="D:/nukkit/plugins/MyHeroNukkit_Items.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>

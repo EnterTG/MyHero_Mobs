@@ -1,12 +1,12 @@
 #name, main, version and api are required
-name: MyHero
+name: MyHeroMobs
 main: Core.MyHeroMain
 version: "0.1"
 api: ["1.0.5"]
 author: WindSkill
-description: Plugin MyHero for Nukkit
-depend: [MobPlugin]
+description: Plugin MyHero Mobs for Nukkit
+depend: [MobPlugin,MyHeroItems]
 commands:
   MyHeroMobs:
     description: MyHero Mobs
-    aliases: [mh,mhm]
+    aliases: [mhm]

@@ -7,8 +7,7 @@ import java.net.URLClassLoader;
 import java.util.Map;
 
 import Events.EntityDeathListener;
-import ItemManager.AbstractItemStackOption;
-import ItemManager.ItemStackManager;
+
 import MobManager.MobManager;
 import MobManager.MobOption;
 import cn.nukkit.Player;
@@ -18,7 +17,6 @@ import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.inventory.InventoryOpenEvent;
 import cn.nukkit.event.player.PlayerJoinEvent;
-import cn.nukkit.level.Location;
 import cn.nukkit.plugin.PluginBase;
 
 public class MyHeroMain extends PluginBase implements Listener
@@ -122,7 +120,7 @@ public class MyHeroMain extends PluginBase implements Listener
 	{
 		if(args.length > 0)
 			switch (args[0]) {
-				case "items":
+				/*case "items":
 					if(args.length > 1)
 					{
 						String ItemName = args[1];
@@ -132,7 +130,7 @@ public class MyHeroMain extends PluginBase implements Listener
 							else
 								sender.sendMessage(LangManager.Prefix);
 					}
-					break;
+					break;*/
 				case "mobs":
 					MobManager.Mobs.get("Test1").getRoot().SpawnEntity(((Player)sender).getLocation());
 					MyHeroMain.Main.getLogger().info("Mob stworzony");
@@ -143,10 +141,7 @@ public class MyHeroMain extends PluginBase implements Listener
 					{
 						this.getLogger().info("Mob == Key: " + Mob.getKey() + " Value: " + Mob.getValue().getEntity().toString());
 					}
-					for(Map.Entry<String, AbstractItemStackOption > Item : ItemStackManager.ItemList.entrySet())
-					{
-						this.getLogger().info("Item == Key: " + Item.getKey() + " Value: " + Item.getValue().getItem().toString());
-					}
+					
 					break;
 				case "reload":
 					LoaderManager.Reload();

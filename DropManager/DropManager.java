@@ -23,7 +23,7 @@ public class DropManager {
 	@SuppressWarnings("unchecked")
 	public static void Load()
 	{
-		File DropsFileRoot = new File(MyHeroMain.Main.getDataFolder() + "/Drops/");
+		File DropsFileRoot = new File(MyHeroMain.Main.getDataFolder() + "../MyHero/Drops/");
 		File[] DropsFileList = DropsFileRoot.listFiles();
 		//MyHeroMain.Main.getLogger().info(MobFileRoot.getPath());
 		if(DropsFileList != null)

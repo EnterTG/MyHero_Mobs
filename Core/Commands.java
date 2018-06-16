@@ -1,7 +1,5 @@
 package Core;
 
-import ItemManager.ItemStackManager;
-import cn.nukkit.Player;
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandExecutor;
 import cn.nukkit.command.CommandSender;
@@ -19,7 +17,7 @@ public class Commands implements CommandExecutor
 					MyHeroMain.Main.getLogger().info("Mob stworzony");
 					//MobManager.Mobs.get("Test1").getSource().SpawnEntity(((Player)sender).getLevel(),((Player)sender).getLocation());
 					break;
-				case "items":
+				/*case "items":
 					if(args.length > 1)
 					{
 						String ItemName = args[1];
@@ -29,7 +27,7 @@ public class Commands implements CommandExecutor
 						else
 								sender.sendMessage(LangManager.Prefix);
 					}
-					break;
+					break;*/
 				
 			}
 		return true;
