@@ -1,13 +1,8 @@
 package Core;
 
-import java.io.IOException;
-import java.lang.reflect.Method;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.Map;
 
 import Events.EntityDeathListener;
-
 import MobManager.MobManager;
 import MobManager.MobOption;
 import cn.nukkit.Player;
@@ -98,21 +93,7 @@ public class MyHeroMain extends PluginBase implements Listener
 		}*/
 		
 	}
-	private void addClassPath(final URL url) throws IOException {
-		final URLClassLoader sysloader = (URLClassLoader ) ClassLoader
-				.getSystemClassLoader();
-		final Class<URLClassLoader> sysclass = URLClassLoader.class;
-		try {
-			final Method method = sysclass.getDeclaredMethod("addURL",
-					new Class[] { URL.class });
-			method.setAccessible(true);
-			method.invoke(sysloader, new Object[] { url });
-		} catch (final Throwable t) {
-			t.printStackTrace();
-			throw new IOException("Error adding " + url
-					+ " to system classloader");
-		}
-	}
+	
 	
 	
 	@Override

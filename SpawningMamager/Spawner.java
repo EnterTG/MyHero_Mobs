@@ -7,15 +7,36 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import Core.LangManager;
-import Core.LangManager.LangHelper;
-import Core.MyHeroMain;
 import MobManager.MyHeroMobCreator;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.level.Level;
 import cn.nukkit.math.Vector3;
 
 public class Spawner {
+
+	public double getChance() {
+		return Chance;
+	}
+
+	public void setChance(double chance) {
+		Chance = chance;
+	}
+
+	public int getMinMobsPerSpawn() {
+		return MinMobsPerSpawn;
+	}
+
+	public void setMinMobsPerSpawn(int minMobsPerSpawn) {
+		MinMobsPerSpawn = minMobsPerSpawn;
+	}
+
+	public int getMaxMobsPerSpawn() {
+		return MaxMobsPerSpawn;
+	}
+
+	public void setMaxMobsPerSpawn(int maxMobsPerSpawn) {
+		MaxMobsPerSpawn = maxMobsPerSpawn;
+	}
 
 	public LinkedHashMap<MyHeroMobCreator, Integer> getMobs() {
 		return Mobs;
@@ -68,6 +89,10 @@ public class Spawner {
 	private static final int MaxRetry = 4;
 	private static final int Density = 1;
 	private List<Entity> SpawnedMobs;
+	
+	private double Chance = 1d;
+	private int MinMobsPerSpawn = 1;
+	private int MaxMobsPerSpawn = 1;
 	
 	private LinkedHashMap<MyHeroMobCreator,Integer> Mobs;
 	private Region region; 

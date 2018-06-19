@@ -1,10 +1,18 @@
 package Core;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+
+import com.google.common.base.Preconditions;
+
 import DropManager.DropManager;
 import MobManager.MobManager;
 import MobManager.MobOptionManager;
 import SpawningMamager.Spawner;
 import SpawningMamager.SpawningManager;
+import cn.nukkit.Server;
+import cn.nukkit.utils.Utils;
 
 
 
@@ -70,6 +78,32 @@ public class LoaderManager
 			e.printStackTrace();
 		}*/
 	}
+	
+	public static boolean saveResource(String filename, String outputName, boolean replace,String dir) {
+        Preconditions.checkArgument(filename != null && outputName != null, "Filename can not be null!");
+        Preconditions.checkArgument(filename.trim().length() != 0 && outputName.trim().length() != 0, "Filename can not be empty!");
+
+        File out = new File(MyHeroMain_Items.Main.getDataFolder().toString().replaceAll(MyHeroMain_Items.Main.getName(), "")+ dir, outputName);
+        if (!out.exists() || replace) {
+            try (InputStream resource = MyHeroMain_Items.Main.getResource(filename)) {
+                if (resource != null) {
+                    File outFolder = out.getParentFile();
+                    if (!outFolder.exists()) {
+                        outFolder.mkdirs();
+                    }
+                    Utils.writeFile(out, resource);
+
+                    return true;
+                }
+            } catch (IOException e) {
+                Server.getInstance().getLogger().logException(e);
+            }
+        }
+        return false;
+    }
+	
+	
+	
 	
 	public static void Reload()
 	{

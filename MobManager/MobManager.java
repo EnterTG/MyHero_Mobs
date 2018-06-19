@@ -11,7 +11,9 @@ import java.util.Map;
 import org.yaml.snakeyaml.Yaml;
 
 import Core.LangManager;
+import Core.LoaderManager;
 import Core.MyHeroMain;
+import Core.MyHeroMain_Items;
 import de.kniffo80.mobplugin.entities.animal.flying.Bat;
 import de.kniffo80.mobplugin.entities.animal.flying.Parrot;
 import de.kniffo80.mobplugin.entities.animal.jumping.Rabbit;
@@ -71,9 +73,16 @@ public class MobManager
 	@SuppressWarnings("unchecked")
 	public static void Load()
 	{
-		File MobFileRoot = new File(MyHeroMain.Main.getDataFolder() + "../MyHero/Mobs/");
+		String path = MyHeroMain_Items.Main.getDataFolder().toString().replaceAll(MyHeroMain_Items.Main.getName(), "");
+		File MobFileRoot = new File(path + "/MyHero/Mobs/");
 		File[] MobsFileList = MobFileRoot.listFiles();
 		//MyHeroMain.Main.getLogger().info(MobFileRoot.getPath());
+		
+		if(!MobFileRoot.exists())
+			MobFileRoot.mkdirs();
+		LoaderManager.saveResource("MobTest.yml","MobTest.yml", false,"/MyHero/Mobs/");
+		
+		
 		if(MobsFileList != null)
 			for(File MobsFile : MobsFileList)
 			{

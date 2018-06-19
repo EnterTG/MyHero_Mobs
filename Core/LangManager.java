@@ -16,7 +16,8 @@ public class LangManager
 			Item_Do_Not_Exist = "%Item_Name% not exist",
 			Drop_Error= "Error in drop %Drop_Name%",
 			Numerc_Error_Spawner = "In %sSpawner_Name% number error",
-			Spawner_Not_Loaded = "Spawner %Spawner_Name% not loaded";
+			Spawner_Not_Loaded = "Spawner %Spawner_Name% not loaded",
+			Mod_do_not_exist = LangHelper.MobName+" do not exist.";
 	
 	
 	public enum LangHelper

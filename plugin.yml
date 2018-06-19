@@ -5,8 +5,9 @@ version: "0.1"
 api: ["1.0.5"]
 author: WindSkill
 description: Plugin MyHero Mobs for Nukkit
-depend: [MobPlugin,MyHeroItems]
+depend: ["MobPlugin"]
+softdepend: ["MyHeroItems"]
 commands:
   MyHeroMobs:
     description: MyHero Mobs
-    aliases: [mhm]
+    aliases: [mh,mhm]

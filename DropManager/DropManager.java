@@ -11,8 +11,10 @@ import java.util.Map;
 import org.yaml.snakeyaml.Yaml;
 
 import Core.LangManager;
+import Core.LoaderManager;
 import Core.LangManager.LangHelper;
 import Core.MyHeroMain;
+import Core.MyHeroMain_Items;
 import ItemManager.ItemStackManager;
 import cn.nukkit.item.Item;
 
@@ -23,9 +25,20 @@ public class DropManager {
 	@SuppressWarnings("unchecked")
 	public static void Load()
 	{
-		File DropsFileRoot = new File(MyHeroMain.Main.getDataFolder() + "../MyHero/Drops/");
+		
+		//MyHeroMain.Main.getLogger().info(MobFileRoot.getPath());
+		String path = MyHeroMain_Items.Main.getDataFolder().toString().replaceAll(MyHeroMain_Items.Main.getName(), "");
+		File DropsFileRoot = new File(path + "/MyHero/Drops/");
 		File[] DropsFileList = DropsFileRoot.listFiles();
 		//MyHeroMain.Main.getLogger().info(MobFileRoot.getPath());
+		
+		if(!DropsFileRoot.exists())
+			DropsFileRoot.mkdirs();
+		LoaderManager.saveResource("DropTest.yml","DropTest.yml", false,"/MyHero/Drops/");
+		
+		
+		
+		
 		if(DropsFileList != null)
 			for(File MobsFile : DropsFileList)
 			{
