@@ -2,6 +2,5 @@ Test1:
     MinDrop: 10
     DropChance: 0.1
     Drop: 
-        - Test1 0.1 1 10
+        - Test 0.1 1 10
         - Test2 0.05
-

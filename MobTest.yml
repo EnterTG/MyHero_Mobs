@@ -1,13 +1,13 @@
 Test1:
     Type: 16
-    Name: Dupa
+    Name: Noob
     Drops:
         - Test1
 Test2:
-    Type: 42l
-    Name: Dupa2
+    Type: 42
+    Name: Baba
     Drops:
         - Test1
 Test3:
     Type: 43
-    Name: "Dupa3"
+    Name: "Ali"

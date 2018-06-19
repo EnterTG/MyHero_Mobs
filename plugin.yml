@@ -1,6 +1,6 @@
 #name, main, version and api are required
 name: MyHeroMobs
-main: Core.MyHeroMain
+main: MyHero_Mobs.Core.MyHeroMain
 version: "0.1"
 api: ["1.0.5"]
 author: WindSkill
