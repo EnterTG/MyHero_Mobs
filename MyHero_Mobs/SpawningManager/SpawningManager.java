@@ -1,27 +1,28 @@
-package MyHero_Mobs.SpawningMamager;
+package MyHero_Mobs.SpawningManager;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.yaml.snakeyaml.Yaml;
 
-import Core.MyHeroMain_Items;
-import MyHero_Mobs.Core.LangManager;
-import MyHero_Mobs.Core.LoaderManager;
-import MyHero_Mobs.Core.MyHeroMain;
-import MyHero_Mobs.Core.LangManager.LangHelper;
-import MyHero_Mobs.MobManager.MobManager;
+import MyHero_Core.Core.MyHeroMain;
+import MyHero_Core.DataManagment.DataMobs;
+import MyHero_Core.Managers.LangManager;
+import MyHero_Core.Managers.LangManager.LangHelper;
+import MyHero_Core.Managers.ResourceManager;
+import MyHero_Mobs.RegionsManager.Region;
+import MyHero_Mobs.RegionsManager.RegionSquare;
+import MyHero_Mobs.RegionsManager.RegionPoint;
 import cn.nukkit.level.Level;
 import cn.nukkit.math.Vector2;
 
 public class SpawningManager {
 	//public static HashMap<String,Spawner> AllSpawners = new HashMap<>();
-	public static List<Spawner> AllSpawners = new ArrayList<Spawner>();
+	
 
 	@SuppressWarnings("unchecked")
 	public static void Load()
@@ -30,14 +31,14 @@ public class SpawningManager {
 		//File[] SpawnsFileList = SpawnFileRoot.listFiles();
 		//MyHeroMain.Main.getLogger().info(SpawnFileRoot.getPath());
 		
-		String path = MyHeroMain_Items.Main.getDataFolder().toString().replaceAll(MyHeroMain_Items.Main.getName(), "");
-		File SpawnFileRoot = new File(path + "/MyHero/Spawners/");
+		
+		File SpawnFileRoot = new File(ResourceManager.getPathTo("Spawners"));
 		File[] SpawnsFileList = SpawnFileRoot.listFiles();
 		//MyHeroMain.Main.getLogger().info(MobFileRoot.getPath());
 		
 		if(!SpawnFileRoot.exists())
 			SpawnFileRoot.mkdirs();
-		LoaderManager.saveResource("SpawnTest.yml","SpawnTest.yml", false,"/MyHero/Spawners/");
+		ResourceManager.saveResource("SpawnTest.yml","SpawnTest.yml", false,"Spawners");
 		
 		
 		
@@ -45,7 +46,7 @@ public class SpawningManager {
 		if(SpawnsFileList != null)
 			for(File SpawnsFIle : SpawnsFileList)
 			{
-				MyHeroMain.Main.getLogger().info(SpawnsFIle.getPath());
+
 				if(SpawnsFIle.isFile())
 				{
 					if(SpawnsFIle.getName().contains(".yml"))
@@ -55,24 +56,39 @@ public class SpawningManager {
 						SpawnsFIleYML.load(SpawnsFIle.getPath());
 						try
 						{
+							DataMobs datamobs = MyHeroMain.getMyHeroData().getDataMobs();
 							Map<String, Map<String, Object>> Spawns = SpawnsFIleYML.loadAs(Files.newInputStream(Paths.get(SpawnsFIle.getPath())), Map.class);
 							for(Map.Entry<String,Map<String, Object>> Spawn : Spawns.entrySet())
 							{
+								
 								Spawner spawner = new Spawner();
 								Map<String, Object> spawnoption = Spawn.getValue();
 								try
 								{
-									Region r = new Region();
+									Region r = null;
+									if(spawnoption.containsKey("Location"))
+									{
+										String s[] = spawnoption.get("Location").toString().split(" ");
+										
+										
+										r = new RegionPoint(Integer.parseInt(s[0]), Integer.parseInt(s[1]), Integer.parseInt(s[2]));
+									}
+									else
+									{
+										r = new RegionSquare();
+										((RegionSquare)r).setP1(new Vector2((int)spawnoption.get("X1"), (int)spawnoption.get("Y1")));
+										((RegionSquare)r).setP2(new Vector2((int)spawnoption.get("X2"), (int)spawnoption.get("Y2")));
+										
+									}
 									
-									r.setP1(new Vector2((int)spawnoption.get("X1"), (int)spawnoption.get("Y1")));
-									r.setP2(new Vector2((int)spawnoption.get("X2"), (int)spawnoption.get("Y2")));
-									spawner.setRegion(r);
-									
-									Level l = MyHeroMain.Main.getServer().getLevelByName((String)spawnoption.get("World"));
+									Level l = MyHeroMain.getMain().getServer().getLevelByName((String)spawnoption.get("World"));
 									if(l != null)
-										spawner.setLevel(l);
+										r.setWorld(l);
 									else
 										break;
+									
+									spawner.setRegion(r);
+									spawner.generateSpawnPoints();
 									
 									if(spawnoption.containsKey("MinMobs"))
 										spawner.setMinMobsPerSpawn((int)spawnoption.get("MinMobs"));
@@ -85,25 +101,26 @@ public class SpawningManager {
 									for(String mob : Mobsinspawner)
 									{
 										String[] mobchance = mob.split(":");
-										if(MobManager.Mobs.containsKey(mobchance[0]))
-											spawner.addMob(MobManager.Mobs.get(mobchance[0]).getRoot(),Integer.parseInt(mobchance[1]));
+										if(datamobs.MobExist(mobchance[0]))
+											spawner.addMob(datamobs.getMob(mobchance[0]).getRoot(),Integer.parseInt(mobchance[1]));
 										else
-											MyHeroMain.Main.getLogger().info(LangManager.Mob_not_exist.replace(LangHelper.MobName.toString(), mobchance[0]));
+											LangManager.Log(LangManager.Mob_not_exist.replace(LangHelper.MobName.toString(), mobchance[0]));
 									}
-									spawner.generateSpawnPoints();
+									
 									//AllSpawners.put(Spawn.getKey(), spawner);
-									AllSpawners.add(spawner);
+									datamobs.addSpawner(spawner);
+									LangManager.Log(spawner.toString());
 									
 								}
 								catch(NumberFormatException ex)
 								{
-									MyHeroMain.Main.getLogger().info(LangManager.Numerc_Error_Spawner.replace(LangHelper.SpawnerName.toString(), Spawn.getKey()));
+									LangManager.Log(LangManager.Numerc_Error_Spawner.replace(LangHelper.SpawnerName.toString(), Spawn.getKey()));
 								}
 								catch(Exception ex)
 								{
-									MyHeroMain.Main.getLogger().info(ex.getMessage());
+									ex.printStackTrace();
 									
-									MyHeroMain.Main.getLogger().info(LangManager.Spawner_Not_Loaded.replace(LangHelper.SpawnerName.toString(), Spawn.getKey()));
+									LangManager.Log(LangManager.Spawner_Not_Loaded.replace(LangHelper.SpawnerName.toString(), Spawn.getKey()));
 								}
 							}
 						}

@@ -1,4 +1,4 @@
-package MyHero_Mobs.SpawningMamager;
+package MyHero_Mobs.SpawningManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,8 +8,8 @@ import java.util.Map;
 import java.util.Random;
 
 import MyHero_Mobs.MobManager.MyHeroMobCreator;
+import MyHero_Mobs.RegionsManager.Region;
 import cn.nukkit.entity.Entity;
-import cn.nukkit.level.Level;
 import cn.nukkit.math.Vector3;
 
 public class Spawner {
@@ -46,48 +46,17 @@ public class Spawner {
 		Mobs = mobs;
 	}
 
-	public Region getRegion() {
-		return region;
-	}
+
 
 	public void setRegion(Region region) {
 		this.region = region;
 	}
 
-	public List<Integer> getSpawnOn() {
-		return SpawnOn;
-	}
 
-	public void setSpawnOn(List<Integer> spawnOn) {
-		SpawnOn = spawnOn;
-	}
 
-	public boolean isSpawninRooms() {
-		return SpawninRooms;
-	}
 
-	public void setSpawninRooms(boolean spawninRooms) {
-		SpawninRooms = spawninRooms;
-	}
-
-	public boolean isSpawninWater() {
-		return SpawninWater;
-	}
-
-	public void setSpawninWater(boolean spawninWater) {
-		SpawninWater = spawninWater;
-	}
-
-	public Level getLevel() {
-		return level;
-	}
-
-	public void setLevel(Level level) {
-		this.level = level;
-	}
 	private static final int MaxMobs = 10;
-	private static final int MaxRetry = 4;
-	private static final int Density = 1;
+
 	private List<Entity> SpawnedMobs;
 	
 	private double Chance = 1d;
@@ -98,26 +67,30 @@ public class Spawner {
 	private Region region; 
 	private List<Vector3> spawnpoints;
 	
-	private List<Integer> SpawnOn;
+
 	
-	private boolean SpawninRooms = false;
-	private boolean SpawninWater = false;
+
 	
-	private Level level;
+
 	
 	public Spawner()
 	{
-		SpawnOn = new ArrayList<Integer>();
+		
 		spawnpoints = new ArrayList<Vector3>();
 		Mobs = new LinkedHashMap<>();
 		SpawnedMobs = new ArrayList<>();
-		SpawnOn.add(1);
+		/*SpawnOn.add(1);
 		SpawnOn.add(2);
-		SpawnOn.add(13);
+		SpawnOn.add(13);*/
 		
 	
 	
 	}
+	public Region getRegion()
+	{
+		return region;
+	}
+	
 	
 	public void addMob(MyHeroMobCreator mob, int chance)
 	{
@@ -143,7 +116,7 @@ public class Spawner {
 					if (Math.random() < weight.get(index)/ max_weight) break;
 				}
 				
-				tmplistmobs.get(index).SpawnEntity(spawnpoints.get(r.nextInt(spawnpoints.size())),level);
+				tmplistmobs.get(index).SpawnEntity(spawnpoints.get(r.nextInt(spawnpoints.size())),region.getWorld());
 				SpawnedMobs.add(tmplistmobs.get(index).getEntity());
 			}
 
@@ -151,44 +124,21 @@ public class Spawner {
 	
 	public void generateSpawnPoints()
 	{
-		int xmin = (int) Math.min(region.getP1().x, region.getP2().x);
-		int xmax = (int) Math.max(region.getP1().x, region.getP2().x);
-		
-		int ymin = (int) Math.min(region.getP1().y, region.getP2().y);
-		int ymax = (int) Math.max(region.getP1().y, region.getP2().y);
-		
-		
-		int denst = 16/Density;
-		for(int x = xmin ; x < xmax;x+=denst)
-		{
-			for(int y = ymin ; y < ymax;y+=denst)
-			{
-				getPossitions(x,y,0);
-			}
-		}
+		region.generateSpawnPoints(spawnpoints);
 		
 	}
 	
-	public void getPossitions(int x,int z,int retry)
+	
+	
+	@Override
+	public String toString()
 	{
-		for(int y = 255;y > 0;y--)
-		{
-			if(SpawnOn.contains(level.getBlockIdAt(x, y, z)) && level.getBlockIdAt(x, y+1, z) == 0)
-			{
-				spawnpoints.add(new Vector3(x, y, z));
-				if(SpawninRooms) continue;
-				else return;
-			}
-		}
-		if(retry != MaxRetry)
-		{
-			Random r = new Random();
-			x +=  r.nextInt(16)-8;
-			z += r.nextInt(16)-8;
-			getPossitions(x,z,++retry);
-		}
+		StringBuilder builder = new StringBuilder();
+		builder.append("Region:" + region.toString() +System.lineSeparator()+" Mobs: " +System.lineSeparator());
+		Mobs.keySet().stream().forEach( (s) -> {builder.append(s.toString());});
+		return builder.toString();
+		
 	}
-	
 	
 	
 }

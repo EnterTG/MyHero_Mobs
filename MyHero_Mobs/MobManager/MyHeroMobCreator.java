@@ -7,7 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-import MyHero_Mobs.DropManager.DropManager;
+import MyHero_Core.Core.MyHeroMain;
+import MyHero_Core.DataManagment.DataMobs;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.item.Item;
 import cn.nukkit.level.Level;
@@ -27,7 +28,7 @@ public class MyHeroMobCreator implements AbstractMobOption
 		type = EntityType;
 		FileName = name;
 	}
-	public void setDropList(String s)
+	public void addDrop(String s)
 	{
 		if(DropsNames == null)
 			DropsNames = new ArrayList<>();
@@ -36,31 +37,36 @@ public class MyHeroMobCreator implements AbstractMobOption
 	}
 	public void SpawnEntity(Location location)
 	{
-		Entity = MobManager.MobsInterface.get(getType()).getEntity(location.getLevel().getChunk(location.getChunkX(), location.getChunkZ()), cn.nukkit.entity.Entity.getDefaultNBT(location));
+		DataMobs datamobs = MyHeroMain.getMyHeroData().getDataMobs();
+		Entity =datamobs.getMobType(getType()).getEntity(location.getLevel().getChunk(location.getChunkX(), location.getChunkZ()), cn.nukkit.entity.Entity.getDefaultNBT(location));
 		
 		//Entity =  new MyHeroMob(location.getLevel().getChunk(location.getChunkX(), location.getChunkZ()), MyHeroMob.getDefaultNBT(location)); 
 		this.Options.executeMobOption();
-		MobManager.AllSpawnedMobs.put(Entity.getId(), this);
+		datamobs.addNewSpawnedMyHeroMob(Entity.getId(), this);
+
 		Entity.spawnToAll();
 	}
 	public void SpawnEntity(Vector3 location,Level l)
 	{
-		Entity = MobManager.MobsInterface.get(getType()).getEntity(l.getChunk(location.getChunkX(), location.getChunkZ()), cn.nukkit.entity.Entity.getDefaultNBT(location));
+		DataMobs datamobs = MyHeroMain.getMyHeroData().getDataMobs();
+		Entity =datamobs.getMobType(getType()).getEntity(l.getChunk(location.getChunkX(), location.getChunkZ()), cn.nukkit.entity.Entity.getDefaultNBT(location));
 		
 		//Entity =  new MyHeroMob(location.getLevel().getChunk(location.getChunkX(), location.getChunkZ()), MyHeroMob.getDefaultNBT(location)); 
 		this.Options.executeMobOption();
-		MobManager.AllSpawnedMobs.put(Entity.getId(), this);
+		datamobs.addNewSpawnedMyHeroMob(Entity.getId(), this);
+		
 		Entity.spawnToAll();
 	}
 	
 	public Item[] getDrop()
 	{
 		Item[] both = new Item[0];
+		DataMobs datamobs = MyHeroMain.getMyHeroData().getDataMobs();
 		if(DropsNames != null)
 			for(String dropstring : DropsNames)
 			{
-				if(DropManager.AllDrops.containsKey(dropstring))
-					both = Stream.concat(Arrays.stream(both), Arrays.stream(DropManager.AllDrops.get(dropstring).getDrop())).toArray(Item[]::new);
+				if(datamobs.DropExist(dropstring))
+					both = Stream.concat(Arrays.stream(both), Arrays.stream(datamobs.getDrop(dropstring).getDrop())).toArray(Item[]::new);
 			}
 		return both;
 	}
@@ -116,7 +122,10 @@ public class MyHeroMobCreator implements AbstractMobOption
 		return FileName;
 	}
 
-
+	@Override
+	public String toString() {
+		return "MobName: "+FileName+" MobType: "+type.name() +" Drops: " + DropsNames.toString()+System.lineSeparator();
+	}
 	
 	
 	

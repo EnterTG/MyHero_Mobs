@@ -2,6 +2,7 @@ package MyHero_Mobs.DropManager;
 
 import java.util.Random;
 
+import MyHero_Items.ItemManager.ItemStackConstructor;
 import cn.nukkit.item.Item;
 
 public class ChanceItem {
@@ -26,10 +27,10 @@ public class ChanceItem {
 		int amount = new Random().nextInt(Amountmax)+Amountmin;
 		Item[] drop = new Item[amount];
 		for(int i =0; i < amount;i++)
-			drop[i] = item.clone();
+			drop[i] = item.spawnItem();
 		return drop;
 	}
-	public void setItem(Item item) {
+	public void setItem(ItemStackConstructor item) {
 		this.item = item;
 	}
 	public double getChance() {
@@ -39,10 +40,10 @@ public class ChanceItem {
 		this.chance = chance;
 	}
 	
-	private Item item;
+	private ItemStackConstructor item;
 	private double chance;
 	
-	public ChanceItem(Item i,double d)
+	public ChanceItem(ItemStackConstructor i,double d)
 	{
 		item = i;
 		chance = d;

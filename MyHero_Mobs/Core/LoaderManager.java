@@ -1,18 +1,7 @@
 package MyHero_Mobs.Core;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-
-import com.google.common.base.Preconditions;
-
-import MyHero_Mobs.DropManager.DropManager;
-import MyHero_Mobs.MobManager.MobManager;
-import MyHero_Mobs.MobManager.MobOptionManager;
-import MyHero_Mobs.SpawningMamager.Spawner;
-import MyHero_Mobs.SpawningMamager.SpawningManager;
-import cn.nukkit.Server;
-import cn.nukkit.utils.Utils;
+import MyHero_Core.Core.MyHeroMain;
+import MyHero_Core.DataManagment.DataMobs;
 
 
 
@@ -22,33 +11,31 @@ public class LoaderManager
 	{
 		/*ItemStackOptionManager.Load();
 		ItemStackManager.LoadItems();*/
-		MyHeroMain.Main.getLogger().info("-----Start load Drops ------");
+		/*MyHeroMain_Mobs.Main.getLogger().info("-----Start load Drops ------");
 		DropManager.Load();
-		MyHeroMain.Main.getLogger().info("-----Start load Mobs ------");
+		MyHeroMain_Mobs.Main.getLogger().info("-----Start load Mobs ------");
 		MobOptionManager.Load();
 		MobManager.Load();
-		MyHeroMain.Main.getLogger().info("-----Start load Spawners ------");
+		MyHeroMain_Mobs.Main.getLogger().info("-----Start load Spawners ------");
 		SpawningManager.Load();
 		
-		
-		MyHeroMain.Main.getServer().getScheduler().scheduleRepeatingTask(MyHeroMain.Main, 
+		*/
+		MyHeroMain.getMain().getServer().getScheduler().scheduleRepeatingTask(MyHeroMain.getMain(), 
 				new Runnable() 
 				{
 					public void run() 
 					{
-						//MyHeroMain.Main.getLogger().info("SpawningMobs");
-						
-						for(Spawner s : SpawningManager.AllSpawners)
+						try
 						{
-							try
-							{
-								s.Spawn();
-							}
-							catch(Exception ex)
-							{
-								ex.printStackTrace();
-							}
+							DataMobs dataitems = MyHeroMain.getMyHeroData().getDataMobs();
+							dataitems.getStreamSpawners().forEach( (s) -> {s.Spawn();});
 						}
+						catch(Exception ex)
+						{
+							ex.printStackTrace();
+						}
+					
+						
 						
 					}
 				}
@@ -87,35 +74,11 @@ public class LoaderManager
 			e.printStackTrace();
 		}*/
 	}
-
-	public static boolean saveResource(String filename, String outputName, boolean replace,String dir) {
-        Preconditions.checkArgument(filename != null && outputName != null, "Filename can not be null!");
-        Preconditions.checkArgument(filename.trim().length() != 0 && outputName.trim().length() != 0, "Filename can not be empty!");
-
-        File out = new File(MyHeroMain.Main.getDataFolder().toString().replaceAll(MyHeroMain.Main.getName(), dir), outputName);
-       
-        if (!out.exists() || replace) {
-            try (InputStream resource = MyHeroMain.Main.getResource(filename)) {
-                if (resource != null) {
-                    File outFolder = out.getParentFile();
-                    if (!outFolder.exists()) {
-                        outFolder.mkdirs();
-                    }
-                    Utils.writeFile(out, resource);
-
-                    return true;
-                }
-            } catch (IOException e) {
-                Server.getInstance().getLogger().logException(e);
-            }
-        }
-        return false;
-    }
 	
 	
 	
 	
-	public static void Reload()
+	/*public static void Reload()
 	{
 
 		DropManager.AllDrops.clear();
@@ -123,5 +86,5 @@ public class LoaderManager
 		MobManager.Mobs.clear();
 		MobManager.MobsInterface.clear();
 		LoadAll();
-	}
+	}*/
 }

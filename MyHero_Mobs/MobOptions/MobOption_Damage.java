@@ -1,7 +1,6 @@
 package MyHero_Mobs.MobOptions;
 
-import MyHero_Mobs.Core.LangManager;
-import MyHero_Mobs.Core.MyHeroMain;
+import MyHero_Core.Managers.LangManager;
 import MyHero_Mobs.MobManager.AbstractMobOption;
 import MyHero_Mobs.MobManager.MobOption;
 import de.kniffo80.mobplugin.entities.monster.Monster;
@@ -25,7 +24,7 @@ public class MobOption_Damage extends MobOption
 		}
 		catch(Exception ex)
 		{
-			MyHeroMain.Main.getLogger().info(LangManager.Mob_HP_Is_Not_Int);
+			LangManager.Log(LangManager.Mob_HP_Is_Not_Int);
 		}
 	}
 
