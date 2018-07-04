@@ -72,8 +72,9 @@ public class SpawningManager {
 										
 										
 										r = new RegionPoint(Integer.parseInt(s[0]), Integer.parseInt(s[1]), Integer.parseInt(s[2]));
+										
 									}
-									else
+									else if(spawnoption.containsKey("X1"))
 									{
 										r = new RegionSquare();
 										((RegionSquare)r).setP1(new Vector2((int)spawnoption.get("X1"), (int)spawnoption.get("Y1")));
@@ -90,12 +91,14 @@ public class SpawningManager {
 									spawner.setRegion(r);
 									spawner.generateSpawnPoints();
 									
-									if(spawnoption.containsKey("MinMobs"))
-										spawner.setMinMobsPerSpawn((int)spawnoption.get("MinMobs"));
-									if(spawnoption.containsKey("MaxMobs"))
-										spawner.setMaxMobsPerSpawn((int)spawnoption.get("MaxMobs"));
-									if(spawnoption.containsKey("Chance"))
+									if(spawnoption.containsKey("SpawnMinMobs"))
+										spawner.setMinMobsPerSpawn((int)spawnoption.get("SpawnMinMobs"));
+									else if(spawnoption.containsKey("SpawnMaxMobs"))
+										spawner.setMaxMobsPerSpawn((int)spawnoption.get("SpawnMaxMobs"));
+									else if(spawnoption.containsKey("Chance"))
 										spawner.setChance((double)spawnoption.get("Chance"));
+									else if(spawnoption.containsKey("MaxMobs"))
+										spawner.setMaxMobs((int)spawnoption.get("MaxMobs"));
 									
 									List<String> Mobsinspawner = (List<String>)spawnoption.get("Mobs");
 									for(String mob : Mobsinspawner)

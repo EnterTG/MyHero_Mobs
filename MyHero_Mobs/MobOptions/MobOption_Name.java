@@ -11,11 +11,11 @@ public class MobOption_Name extends MobOption
 	}
 	
 	private String val;
-	public void addMobOption(String... value)
+	public void addMobOption(Object... value)
 	{
 		//MyHeroMain.Main.getLogger().info("Val: " + getEntity());
 		//getEntity().setNameTag(value[0]);
-		val = value[0];
+		val = (String)value[0];
 		setOption(this);
 	}
 

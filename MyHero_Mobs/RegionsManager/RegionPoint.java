@@ -27,5 +27,10 @@ public class RegionPoint extends Region{
 	public void generateSpawnPoints(List<Vector3> target) {
 		target.add(new Vector3(x, y, z));
 	}
+	@Override
+	public String toString()
+	{
+		return "X: "+x +" Y: " +y + " Z: " +z;
+	}
 
 }

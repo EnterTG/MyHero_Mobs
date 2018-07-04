@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import MyHero_Core.Managers.LangManager;
 import MyHero_Mobs.MobManager.MyHeroMobCreator;
 import MyHero_Mobs.RegionsManager.Region;
 import cn.nukkit.entity.Entity;
@@ -19,7 +20,7 @@ public class Spawner {
 	}
 
 	public void setChance(double chance) {
-		Chance = chance;
+		Chance =  Math.max(1, chance);
 	}
 
 	public int getMinMobsPerSpawn() {
@@ -27,7 +28,7 @@ public class Spawner {
 	}
 
 	public void setMinMobsPerSpawn(int minMobsPerSpawn) {
-		MinMobsPerSpawn = minMobsPerSpawn;
+		MinMobsPerSpawn = Math.max(1, minMobsPerSpawn);
 	}
 
 	public int getMaxMobsPerSpawn() {
@@ -35,7 +36,7 @@ public class Spawner {
 	}
 
 	public void setMaxMobsPerSpawn(int maxMobsPerSpawn) {
-		MaxMobsPerSpawn = maxMobsPerSpawn;
+		MaxMobsPerSpawn =  Math.max(1, maxMobsPerSpawn);
 	}
 
 	public LinkedHashMap<MyHeroMobCreator, Integer> getMobs() {
@@ -55,7 +56,7 @@ public class Spawner {
 
 
 
-	private static final int MaxMobs = 10;
+	private int MaxMobs = 1;
 
 	private List<Entity> SpawnedMobs;
 	
@@ -75,6 +76,7 @@ public class Spawner {
 	
 	public Spawner()
 	{
+		
 		
 		spawnpoints = new ArrayList<Vector3>();
 		Mobs = new LinkedHashMap<>();
@@ -99,6 +101,7 @@ public class Spawner {
 	
 	public void Spawn()
 	{
+		//LangManager.Log(toString());
 		int n = Mobs.size();
 		List<Integer> weight = new ArrayList<Integer>();
 		for(Map.Entry<MyHeroMobCreator,Integer> entry : Mobs.entrySet())
@@ -109,23 +112,34 @@ public class Spawner {
 		ArrayList<MyHeroMobCreator> tmplistmobs = (new ArrayList<MyHeroMobCreator>(Mobs.keySet()));
 		Random r = new Random();
 		int index;
-		if(SpawnedMobs.size() < MaxMobs)
-			for (int i = 0; i < spawnpoints.size(); i++) {
-				while (true) {
-					index = (int) (Math.random() * n);
-					if (Math.random() < weight.get(index)/ max_weight) break;
+		//LangManager.Log("List size: " +SpawnedMobs.size() + " MaxMobs: " + MaxMobs);
+		
+		for (int i = 0; i < spawnpoints.size(); i++) 
+		{
+			if(SpawnedMobs.size() < MaxMobs)
+			{
+				if(r.nextDouble() <= Chance)
+				{
+					while (true) {
+						index = (int) (Math.random() * n);
+						if (Math.random() < weight.get(index)/ max_weight) break;
+					}
+					LangManager.Log("Spawning mob");
+					tmplistmobs.get(index).SpawnEntity(spawnpoints.get(r.nextInt(spawnpoints.size())),region.getWorld());
+					SpawnedMobs.add(tmplistmobs.get(index).getEntity());
 				}
-				
-				tmplistmobs.get(index).SpawnEntity(spawnpoints.get(r.nextInt(spawnpoints.size())),region.getWorld());
-				SpawnedMobs.add(tmplistmobs.get(index).getEntity());
 			}
-
+			else
+			{
+				break;
+			}
+		}
 	}
 	
 	public void generateSpawnPoints()
 	{
 		region.generateSpawnPoints(spawnpoints);
-		
+		LangManager.Log("Amount spawn points: "  + spawnpoints.size());
 	}
 	
 	
@@ -138,6 +152,15 @@ public class Spawner {
 		Mobs.keySet().stream().forEach( (s) -> {builder.append(s.toString());});
 		return builder.toString();
 		
+	}
+
+	public int getMaxMobs() {
+		return MaxMobs;
+	}
+
+	public void setMaxMobs(int maxMobs) {
+		LangManager.Log("Set max mobs to: " + maxMobs );
+		MaxMobs = Math.max(1, maxMobs);
 	}
 	
 	

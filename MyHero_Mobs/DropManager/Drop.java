@@ -13,17 +13,17 @@ public class Drop {
 		return MinDrop;
 	}
 	public void setMinDrop(int minDrop) {
-		MinDrop = minDrop;
+		MinDrop =Math.max(1, minDrop);
 	}
 	public int getMaxDrop() {
 		return MaxDrop;
 	}
 	public void setMaxDrop(int maxDrop) {
-		MaxDrop = maxDrop;
+		MaxDrop = Math.max(1, maxDrop);
 	}
 
 
-	private int MinDrop = 0, MaxDrop = 4;
+	private int MinDrop = 1, MaxDrop = 1;
 	private Double DropChance = 1d;
 	
 	private List<ChanceItem> Drops = new ArrayList<ChanceItem>();
@@ -74,7 +74,7 @@ public class Drop {
 		return DropChance;
 	}
 	public void setDropChance(Double dropChance) {
-		DropChance = dropChance;
+		DropChance = Math.max(1, dropChance);
 	}
 	
 }

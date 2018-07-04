@@ -86,7 +86,7 @@ public class MyHeroMobCreator implements AbstractMobOption
 	{
 		this.Options = a;
 	}
-	public void addMobOption(String... value)
+	public void addMobOption(Object... value)
 	{
 		
 	}

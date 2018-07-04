@@ -28,7 +28,7 @@ public class LoaderManager
 						try
 						{
 							DataMobs dataitems = MyHeroMain.getMyHeroData().getDataMobs();
-							dataitems.getStreamSpawners().forEach( (s) -> {s.Spawn();});
+							dataitems.getStreamSpawners().forEach( (s) -> { s.Spawn(); });
 						}
 						catch(Exception ex)
 						{

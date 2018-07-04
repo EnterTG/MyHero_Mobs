@@ -1,9 +1,0 @@
-Test1:
-    X1: 2571
-    Y1: 2960
-    X2: 2483
-    Y2: 3103
-    World: "world"
-    Mobs:
-     - Test1:1
-     - Test2:2

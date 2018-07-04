@@ -110,41 +110,41 @@ public class MobManager
 									{
 										LangManager.Log(LangManager.Mob_Type_Is_Not_Int.replaceAll("%Mob_Name%",Mob.getKey()));
 									}
-										if(MobsType.findByKey(MobID) == null)
+									if(MobsType.findByKey(MobID) == null)
+									{
+										LangManager.Log(LangManager.Mob_Dont_Have_Type.replaceAll("%Mob_Name%",Mob.getKey()) );
+										continue;
+									}
+									MyHeroMobCreator mobCreator = new MyHeroMobCreator(Mob.getKey(),MobsType.findByKey(MobID));
+									AbstractMobOption OptionLast = mobCreator;
+									//LangManager.Log("Mob id: " + MobID);
+									
+									for(Map.Entry<String, Object> Options : Mob.getValue().entrySet())
+									{
+										if(datamobs.OptionExist(Options.getKey()))
 										{
-											LangManager.Log(LangManager.Mob_Dont_Have_Type.replaceAll("%Mob_Name%",Mob.getKey()) );
-											continue;
+											//LangManager.Log("Option add: " + Options.getKey());
+											//LangManager.Log("Option value: " + Options.getValue().toString());
+											MobOption Option = datamobs.getOption(Options.getKey().toString()).Create(OptionLast);
+											Option.addMobOption(Options.getValue());
+											OptionLast = Option;
 										}
-										MyHeroMobCreator mobCreator = new MyHeroMobCreator(Mob.getKey(),MobsType.findByKey(MobID));
-										AbstractMobOption OptionLast = mobCreator;
-										//LangManager.Log("Mob id: " + MobID);
-										
-										for(Map.Entry<String, Object> Options : Mob.getValue().entrySet())
+										else if(Options.getKey().equalsIgnoreCase("drops"))
 										{
-											if(datamobs.OptionExist(Options.getKey()))
-											{
-												//LangManager.Log("Option add: " + Options.getKey());
-												//LangManager.Log("Option value: " + Options.getValue().toString());
-												MobOption Option = datamobs.getOption(Options.getKey().toString()).Create(OptionLast);
-												Option.addMobOption(Options.getValue().toString());
-												OptionLast = Option;
-											}
-											else if(Options.getKey().equalsIgnoreCase("drops"))
+											
+											List<String> drops = (List<String>)Options.getValue();
+											for(String s : drops)
 											{
 												
-												List<String> drops = (List<String>)Options.getValue();
-												for(String s : drops)
+												if(datamobs.DropExist(s))
 												{
-													
-													if(datamobs.DropExist(s))
-													{
-														OptionLast.getRoot().addDrop(s);
-													}
+													OptionLast.getRoot().addDrop(s);
 												}
 											}
 										}
-										LangManager.Log(LangManager.Mob_Load_Succes.replaceAll("%Mob_Name%",Mob.getKey()) );
-										datamobs.addMob(Mob.getKey(), (MobOption)OptionLast);//MobManager.Mobs.put(Mob.getKey(),(MobOption)OptionLast);
+									}
+									LangManager.Log(LangManager.Mob_Load_Succes.replaceAll("%Mob_Name%",Mob.getKey()) );
+									datamobs.addMob(Mob.getKey(), (MobOption)OptionLast);//MobManager.Mobs.put(Mob.getKey(),(MobOption)OptionLast);
 								}
 								else
 								{

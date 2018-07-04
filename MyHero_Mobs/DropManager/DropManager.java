@@ -58,8 +58,9 @@ public class DropManager {
 							for(Map.Entry<String,Map<String, Object>> Drop : Drops.entrySet())
 							{
 								if(Drop.getValue().containsKey("Drop")) {
-									Drop newdrop = new Drop();
+									
 									List<String> ItemsList = (List<String>)Drop.getValue().get("Drop");
+									Drop newdrop = new Drop();
 									for(String DropItemString : ItemsList)
 									{
 										String[] ItemStrings = DropItemString.split(" ");

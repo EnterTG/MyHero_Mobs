@@ -12,13 +12,13 @@ public class MobOption_HP extends MobOption
 	}
 	
 	private int val;
-	public void addMobOption(String... value)
+	public void addMobOption(Object... value)
 	{
 		//MyHeroMain.Main.getLogger().info("Val: " + getEntity());
 		//getEntity().setNameTag(value[0]);
 		try
 		{
-			val = Integer.parseInt(value[0]);
+			val = Integer.parseInt((String)value[0]);
 			setOption(this);
 		}
 		catch(Exception ex)
@@ -39,6 +39,7 @@ public class MobOption_HP extends MobOption
 	public void executeMobOption() {
 		// TODO Auto-generated method stub
 		getEntity().setMaxHealth(val);
+		getEntity().setHealth(getEntity().getMaxHealth());
 		MobOption.executeMobOption();
 	}
 }

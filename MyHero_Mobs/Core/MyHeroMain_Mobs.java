@@ -13,10 +13,13 @@ public class MyHeroMain_Mobs extends PluginBase
 	@Override
 	public void onEnable()
 	{
-		this.getServer().getPluginManager().registerEvents(new EntityDeathListener(),this);
+		
 		MyHeroMain.getMyHeroData().InicializeDataMobs();
 		MyHeroMain.getMyHeroData().getDataMobs().Start();
 		LoaderManager.LoadAll();
+		
+		if(MyHeroMain.getMyHeroData().MyHeroItems)
+			this.getServer().getPluginManager().registerEvents(new EntityDeathListener(),this);
 	}
 	
 	

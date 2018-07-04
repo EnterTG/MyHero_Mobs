@@ -10,7 +10,7 @@ public interface AbstractMobOption
 	void setOption(AbstractMobOption a);
 	MyHeroMobCreator getRoot();
 	void executeMobOption();
-	void addMobOption(String... value);
+	void addMobOption(Object... value);
 
 	Entity getEntity();
 }

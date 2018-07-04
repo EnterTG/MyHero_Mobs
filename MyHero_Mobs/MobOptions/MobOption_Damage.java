@@ -13,13 +13,13 @@ public class MobOption_Damage extends MobOption
 	}
 	
 	private int val;
-	public void addMobOption(String... value)
+	public void addMobOption(Object... value)
 	{
 		//MyHeroMain.Main.getLogger().info("Val: " + getEntity());
 		//getEntity().setNameTag(value[0]);
 		try
 		{
-			val = Integer.parseInt(value[0]);
+			val = Integer.parseInt((String)value[0]);
 			setOption(this);
 		}
 		catch(Exception ex)
