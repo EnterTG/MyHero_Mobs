@@ -18,7 +18,8 @@ public class MobOption_HP extends MobOption
 		//getEntity().setNameTag(value[0]);
 		try
 		{
-			val = Integer.parseInt((String)value[0]);
+			
+			val = Integer.parseInt(value[0]+"");
 			setOption(this);
 		}
 		catch(Exception ex)

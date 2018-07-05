@@ -144,7 +144,7 @@ public class MobManager
 										}
 									}
 									LangManager.Log(LangManager.Mob_Load_Succes.replaceAll("%Mob_Name%",Mob.getKey()) );
-									datamobs.addMob(Mob.getKey(), (MobOption)OptionLast);//MobManager.Mobs.put(Mob.getKey(),(MobOption)OptionLast);
+									datamobs.addMob(Mob.getKey(), OptionLast.getRoot());//MobManager.Mobs.put(Mob.getKey(),(MobOption)OptionLast);
 								}
 								else
 								{

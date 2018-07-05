@@ -18,8 +18,7 @@ public class MyHeroMain_Mobs extends PluginBase
 		MyHeroMain.getMyHeroData().getDataMobs().Start();
 		LoaderManager.LoadAll();
 		
-		if(MyHeroMain.getMyHeroData().MyHeroItems)
-			this.getServer().getPluginManager().registerEvents(new EntityDeathListener(),this);
+		this.getServer().getPluginManager().registerEvents(new EntityDeathListener(),this);
 	}
 	
 	

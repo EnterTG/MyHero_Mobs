@@ -63,6 +63,7 @@ public class SpawningManager {
 								
 								Spawner spawner = new Spawner();
 								Map<String, Object> spawnoption = Spawn.getValue();
+								
 								try
 								{
 									Region r = null;
@@ -93,13 +94,14 @@ public class SpawningManager {
 									
 									if(spawnoption.containsKey("SpawnMinMobs"))
 										spawner.setMinMobsPerSpawn((int)spawnoption.get("SpawnMinMobs"));
-									else if(spawnoption.containsKey("SpawnMaxMobs"))
+									if(spawnoption.containsKey("SpawnMaxMobs"))
 										spawner.setMaxMobsPerSpawn((int)spawnoption.get("SpawnMaxMobs"));
-									else if(spawnoption.containsKey("Chance"))
+									if(spawnoption.containsKey("Chance"))
 										spawner.setChance((double)spawnoption.get("Chance"));
-									else if(spawnoption.containsKey("MaxMobs"))
+									if(spawnoption.containsKey("MaxMobs"))
 										spawner.setMaxMobs((int)spawnoption.get("MaxMobs"));
-									
+									if(spawnoption.containsKey("Timer"))
+										spawner.setTimer((int)spawnoption.get("Timer"));
 									List<String> Mobsinspawner = (List<String>)spawnoption.get("Mobs");
 									for(String mob : Mobsinspawner)
 									{

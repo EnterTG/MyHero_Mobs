@@ -35,27 +35,35 @@ public class MyHeroMobCreator implements AbstractMobOption
 		DropsNames.add(s);
 		
 	}
-	public void SpawnEntity(Location location)
+	public Entity SpawnEntity(Location location)
 	{
+		if(!MyHeroMain.getMyHeroData().MyHeroMobs) return null;
 		DataMobs datamobs = MyHeroMain.getMyHeroData().getDataMobs();
 		Entity =datamobs.getMobType(getType()).getEntity(location.getLevel().getChunk(location.getChunkX(), location.getChunkZ()), cn.nukkit.entity.Entity.getDefaultNBT(location));
 		
 		//Entity =  new MyHeroMob(location.getLevel().getChunk(location.getChunkX(), location.getChunkZ()), MyHeroMob.getDefaultNBT(location)); 
 		this.Options.executeMobOption();
-		datamobs.addNewSpawnedMyHeroMob(Entity.getId(), this);
-
+		
+		datamobs.addNewSpawnedMyHeroMob(Entity.getId(), Entity);
+		datamobs.addNewSpawnedMyHeroMobCreator(Entity.getId(), this);
+		
 		Entity.spawnToAll();
+		Entity.fireTicks = -30;
+		return Entity;
 	}
-	public void SpawnEntity(Vector3 location,Level l)
+	public Entity SpawnEntity(Vector3 location,Level l)
 	{
+		if(!MyHeroMain.getMyHeroData().MyHeroMobs) return null;
 		DataMobs datamobs = MyHeroMain.getMyHeroData().getDataMobs();
 		Entity =datamobs.getMobType(getType()).getEntity(l.getChunk(location.getChunkX(), location.getChunkZ()), cn.nukkit.entity.Entity.getDefaultNBT(location));
-		
+		final long id = Entity.getId();
 		//Entity =  new MyHeroMob(location.getLevel().getChunk(location.getChunkX(), location.getChunkZ()), MyHeroMob.getDefaultNBT(location)); 
 		this.Options.executeMobOption();
-		datamobs.addNewSpawnedMyHeroMob(Entity.getId(), this);
-		
+		datamobs.addNewSpawnedMyHeroMob(id, Entity);
+		datamobs.addNewSpawnedMyHeroMobCreator(id, this);
 		Entity.spawnToAll();
+		Entity.fireTicks = -30;
+		return Entity;
 	}
 	
 	public Item[] getDrop()

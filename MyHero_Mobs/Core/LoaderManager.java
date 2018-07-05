@@ -1,10 +1,5 @@
 package MyHero_Mobs.Core;
 
-import MyHero_Core.Core.MyHeroMain;
-import MyHero_Core.DataManagment.DataMobs;
-
-
-
 public class LoaderManager
 {
 	public static void LoadAll()
@@ -20,7 +15,9 @@ public class LoaderManager
 		SpawningManager.Load();
 		
 		*/
-		MyHeroMain.getMain().getServer().getScheduler().scheduleRepeatingTask(MyHeroMain.getMain(), 
+		//DataMobs dataitems = MyHeroMain.getMyHeroData().getDataMobs();
+		//dataitems.getStreamSpawners().forEach( (s) -> { s.Spawn(); });
+		/*MyHeroMain.getMain().getServer().getScheduler().scheduleRepeatingTask(MyHeroMain.getMain(), 
 				new Runnable() 
 				{
 					public void run() 
@@ -39,7 +36,7 @@ public class LoaderManager
 						
 					}
 				}
-		, 100,true);
+		, 100,true);*/
 		//ObjectMapper mapper = new ObjectMapper();
 		
 		//For testing

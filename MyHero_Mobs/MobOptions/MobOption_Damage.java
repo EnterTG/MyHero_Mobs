@@ -12,19 +12,19 @@ public class MobOption_Damage extends MobOption
 		super(MobOption);
 	}
 	
-	private int val;
+	private float val;
 	public void addMobOption(Object... value)
 	{
 		//MyHeroMain.Main.getLogger().info("Val: " + getEntity());
 		//getEntity().setNameTag(value[0]);
 		try
 		{
-			val = Integer.parseInt((String)value[0]);
+			val = Integer.parseInt(value[0]+"");
 			setOption(this);
 		}
 		catch(Exception ex)
 		{
-			LangManager.Log(LangManager.Mob_HP_Is_Not_Int);
+			LangManager.Log(LangManager.Mob_Damage_Is_Not_Int);
 		}
 	}
 
@@ -39,7 +39,7 @@ public class MobOption_Damage extends MobOption
 	@Override
 	public void executeMobOption() {
 		if(getEntity() instanceof Monster )
-			((Monster)getEntity()).setDamage(new float[] {val});
+			((Monster)getEntity()).setDamage(new float[] {val,val,val,val});
 		MobOption.executeMobOption();
 	}
 }

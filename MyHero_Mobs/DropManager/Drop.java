@@ -41,7 +41,8 @@ public class Drop {
 	public Item[] getDrop()
 	{
 		Random r = new Random();
-		if(r.nextDouble() <= DropChance)
+		double d = r.nextDouble();
+		if(d <= DropChance)
 		{
 			List<Item> itemsdrop = new ArrayList<>();
 			int n = Drops.size();
@@ -74,7 +75,7 @@ public class Drop {
 		return DropChance;
 	}
 	public void setDropChance(Double dropChance) {
-		DropChance = Math.max(1, dropChance);
+		DropChance = Math.min(1, dropChance);
 	}
 	
 }

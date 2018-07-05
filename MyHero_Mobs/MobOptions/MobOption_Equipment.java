@@ -3,11 +3,9 @@ package MyHero_Mobs.MobOptions;
 import java.util.List;
 
 import MyHero_Core.Core.MyHeroMain;
-import MyHero_Core.Managers.LangManager;
 import MyHero_Mobs.MobManager.AbstractMobOption;
 import MyHero_Mobs.MobManager.MobOption;
 import cn.nukkit.item.Item;
-import cn.nukkit.item.ItemBow;
 import cn.nukkit.network.protocol.MobArmorEquipmentPacket;
 import cn.nukkit.network.protocol.MobEquipmentPacket;
 import cn.nukkit.scheduler.ServerScheduler;
@@ -52,7 +50,6 @@ public class MobOption_Equipment extends MobOption{
 			{
 				if(eq[i] != null)
 				{
-					LangManager.Log("Debug 1");
 					MobEquipmentPacket pk = new MobEquipmentPacket();
 					
 					pk.eid = this.getEntity().getId();
@@ -65,7 +62,7 @@ public class MobOption_Equipment extends MobOption{
 							public void onRun(int arg0) {
 								p.dataPacket(pk);
 							}
-						}, 20);
+						}, 1);
 					} 
 					);
 				}
@@ -84,7 +81,7 @@ public class MobOption_Equipment extends MobOption{
 							public void onRun(int arg0) {
 								p.dataPacket(pk);
 							}
-						}, 20);
+						}, 1);
 					} 
 				);
 			}
@@ -93,6 +90,7 @@ public class MobOption_Equipment extends MobOption{
 		MobOption.executeMobOption();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void addMobOption(Object... value) {
 		for(String s : ((List<String>)value[0]))
