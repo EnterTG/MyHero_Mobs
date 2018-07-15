@@ -1,6 +1,7 @@
 package MyHero_Mobs.Events;
 
 import MyHero_Core.Core.MyHeroMain;
+import MyHero_Core.Managers.LangManager;
 import MyHero_Levels.API.MyHeroLevel;
 import MyHero_Levels.API.MyHeroLevelsAPI;
 import MyHero_Levels.Core.MyHeroLevelsMain;
@@ -52,6 +53,7 @@ public class EntityDeathListener implements Listener{
 		{
 			MyHeroMobCreator mhmc = MyHeroMain.getMyHeroData().getDataMobs().getMyHeroMobInstance(e.getEntity().getId());
 			MyHeroMobDie event = new MyHeroMobDie(e.getEntity(),e.getDamager(), mhmc);
+			
 			MyHeroMain.getMain().getServer().getPluginManager().callEvent(event);
 			if(!event.isCancelled())
 			{

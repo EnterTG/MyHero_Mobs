@@ -29,6 +29,7 @@ public class MyHeroMobDie extends Event implements Cancellable{
 	{
  		setKiller(killer);
  		setVictim(victim);
+ 		myherocreator = mhm;
 		if(MyHeroMain.getMyHeroData().MyHeroItems)
 			this.setDrop(mhm.getDrop());
 		this.setDrop(drop);
