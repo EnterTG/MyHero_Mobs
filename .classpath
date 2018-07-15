@@ -7,5 +7,6 @@
 	<classpathentry kind="src" path="/MobPlugin"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/MyHero_Core"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/MyHero_Items"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/MyHero_Levels"/>
 	<classpathentry kind="output" path=""/>
 </classpath>

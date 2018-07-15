@@ -66,7 +66,7 @@ public class RegionSquare extends Region{
 	{
 		for(int y = 255;y > 0;y--)
 		{
-			if(SpawnOn.contains(getWorld().getBlockIdAt(x, y, z)) && getWorld().getBlockIdAt(x, y+1, z) == 0)
+			if(SpawnOn.contains(getWorld().getBlockIdAt(x, y, z)) && getWorld().getBlockIdAt(x, y+1, z) == 0 && getWorld().getBlockIdAt(x, y+2, z) == 0 )
 			{
 				t.add(new Vector3(x, y, z));
 				if(SpawninRooms) continue;

@@ -6,6 +6,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.yaml.snakeyaml.Yaml;
 
@@ -94,6 +96,11 @@ public class MobManager
 						MobsFileYML.load(MobsFile.getPath());
 						try
 						{
+							String pattern = "exp\\ (\\d+)";
+							Pattern p = Pattern.compile(pattern);
+							Matcher m;
+							
+							
 							
 							Map<String, Map<String, Object>> Mobs = MobsFileYML.loadAs(Files.newInputStream(Paths.get(MobsFile.getPath())), Map.class);
 							for(Map.Entry<String,Map<String, Object>> Mob : Mobs.entrySet())
@@ -140,6 +147,15 @@ public class MobManager
 												{
 													OptionLast.getRoot().addDrop(s);
 												}
+												else
+												{
+													
+													m = p.matcher(s);
+													while(m.find())
+													{
+														OptionLast.getRoot().setExp(Integer.parseInt(m.group(1)));
+													}
+												}
 											}
 										}
 									}
@@ -153,7 +169,6 @@ public class MobManager
 							}
 						}
 						catch ( IOException e )
-						
 						{
 							e.printStackTrace();
 						}

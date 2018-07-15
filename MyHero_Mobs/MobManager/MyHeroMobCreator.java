@@ -21,7 +21,11 @@ public class MyHeroMobCreator implements AbstractMobOption
 	private final String FileName;
 	private final MobsType type;
 	private AbstractMobOption Options;
+	
+	
 	private List<String> DropsNames;
+	private long Exp = 0;
+	
 	
 	public MyHeroMobCreator(String name ,MobsType EntityType)
 	{
@@ -134,7 +138,13 @@ public class MyHeroMobCreator implements AbstractMobOption
 	public String toString() {
 		return "MobName: "+FileName+" MobType: "+type.name() +" Drops: " + DropsNames.toString()+System.lineSeparator();
 	}
-	
-	
+	public void setExp(long e)
+	{
+		Exp = e;
+	}
+	public long getExp()
+	{
+		return Exp;
+	}
 	
 }

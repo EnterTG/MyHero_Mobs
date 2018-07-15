@@ -134,7 +134,7 @@ public class Spawner {
 	 */
 	
 	private boolean Activated = true;
-	private void Stop()
+	public void Stop()
 	{
 		Activated = false;
 	}
