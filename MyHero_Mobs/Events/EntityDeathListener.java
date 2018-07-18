@@ -12,7 +12,7 @@ import cn.nukkit.entity.Entity;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.entity.EntityDamageByEntityEvent;
-import cn.nukkit.event.entity.EntityDamageEvent.DamageCause;
+import cn.nukkit.event.entity.EntityDeathEvent;
 import cn.nukkit.item.Item;
 import cn.nukkit.level.Level;
 import cn.nukkit.level.Location;
@@ -23,30 +23,19 @@ public class EntityDeathListener implements Listener{
 
 	
 	
-	/*@EventHandler
+	@EventHandler
 	public void onEntityDeath(EntityDeathEvent e)
 	{
-		//LangManager.Log("Is MyHeroMob : " + MyHeroMain.getMyHeroData().getDataMobs().isMyHeroMob(e.getEntity().getId()));
-		if(!MyHeroMain.getMyHeroData().MyHeroMobs) return;
 		if(MyHeroMain.getMyHeroData().getDataMobs().isMyHeroMob(e.getEntity().getId()))
 		{
-			MyHeroMobDie event = new MyHeroMobDie(e.getEntity(), MyHeroMain.getMyHeroData().getDataMobs().getMyHeroMobInstance(e.getEntity().getId()));
-			MyHeroMain.getMain().getServer().getPluginManager().callEvent(event);
-			if(!event.isCancelled())
-			{
-				MyHeroMain.getMyHeroData().getDataMobs().removeSpawnedMyHeroMob(e.getEntity().getId());
-			}
-			else
-			{
-				e.setCancelled(true);
-			}
-			
+			e.setDrops( new Item[]{Item.get(0) });
 		}
-	}*/
+	}
 	@EventHandler
 	public void onEntityDamage(EntityDamageByEntityEvent e)
 	{
 		//if(e.getCause().equals(DamageCause.CUSTOM)) return;
+		LangManager.Log("Damage: " + e.getDamage());
 		if(e.getEntity().getHealth()- e.getDamage() > 0 ) return;
 		
 		if(e.getDamager() instanceof Player && !(e.getEntity() instanceof Player) && MyHeroMain.getMyHeroData().getDataMobs().isMyHeroMob(e.getEntity().getId()))
@@ -83,6 +72,7 @@ public class EntityDeathListener implements Listener{
 		{
 			MyHeroLevelsAPI api = MyHeroLevelsMain.getAPI();
 			MyHeroLevel mhl = api.getMyHeroLevel((Player)e.getKiller());
+			LangManager.Log("Exp: " + e.getMyherocreator().getExp()+"");
 			mhl.addExp(e.getMyherocreator().getExp(),getMobType(e.getVictim()));
 		}
 	}

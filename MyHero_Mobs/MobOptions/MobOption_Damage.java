@@ -38,6 +38,7 @@ public class MobOption_Damage extends MobOption
 
 	@Override
 	public void executeMobOption() {
+		
 		if(getEntity() instanceof Monster )
 			((Monster)getEntity()).setDamage(new float[] {val,val,val,val});
 		MobOption.executeMobOption();

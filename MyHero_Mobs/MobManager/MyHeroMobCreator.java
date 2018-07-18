@@ -25,7 +25,7 @@ public class MyHeroMobCreator implements AbstractMobOption
 	
 	private List<String> DropsNames;
 	private long Exp = 0;
-	
+	private long Damage = 1;
 	
 	public MyHeroMobCreator(String name ,MobsType EntityType)
 	{
@@ -145,6 +145,12 @@ public class MyHeroMobCreator implements AbstractMobOption
 	public long getExp()
 	{
 		return Exp;
+	}
+	public long getDamage() {
+		return Damage;
+	}
+	public void setDamage(long damage) {
+		Damage = damage;
 	}
 	
 }
