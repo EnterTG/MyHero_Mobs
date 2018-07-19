@@ -149,11 +149,9 @@ public class MobManager
 												}
 												else
 												{
-													LangManager.Log("Drop: " + s);
 													m = p.matcher(s);
 													while(m.find())
 													{
-														LangManager.Log("Znalazlem");
 														OptionLast.getRoot().setExp(Integer.parseInt(m.group(1)));
 													}
 												}

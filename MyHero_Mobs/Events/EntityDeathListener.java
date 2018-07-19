@@ -4,7 +4,7 @@ import MyHero_Core.Core.MyHeroMain;
 import MyHero_Core.Managers.LangManager;
 import MyHero_Levels.API.MyHeroLevel;
 import MyHero_Levels.API.MyHeroLevelsAPI;
-import MyHero_Levels.Core.MyHeroLevelsMain;
+import MyHero_Levels.Core.MyHeroMain_Levels;
 import MyHero_Levels.Events.MyHeroExpSource;
 import MyHero_Mobs.MobManager.MyHeroMobCreator;
 import cn.nukkit.Player;
@@ -70,9 +70,9 @@ public class EntityDeathListener implements Listener{
 		}
 		if(MyHeroMain.getMyHeroData().MyHeroLevels)
 		{
-			MyHeroLevelsAPI api = MyHeroLevelsMain.getAPI();
+			MyHeroLevelsAPI api = MyHeroMain_Levels.getAPI();
 			MyHeroLevel mhl = api.getMyHeroLevel((Player)e.getKiller());
-			LangManager.Log("Exp: " + e.getMyherocreator().getExp()+"");
+			
 			mhl.addExp(e.getMyherocreator().getExp(),getMobType(e.getVictim()));
 		}
 	}
