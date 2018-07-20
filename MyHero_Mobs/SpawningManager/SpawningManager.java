@@ -13,10 +13,10 @@ import MyHero_Core.Core.MyHeroMain;
 import MyHero_Core.DataManagment.DataMobs;
 import MyHero_Core.Managers.LangManager;
 import MyHero_Core.Managers.LangManager.LangHelper;
+import MyHero_Core.Regions.Region;
+import MyHero_Core.Regions.RegionPoint;
+import MyHero_Core.Regions.RegionSquare;
 import MyHero_Core.Managers.ResourceManager;
-import MyHero_Mobs.RegionsManager.Region;
-import MyHero_Mobs.RegionsManager.RegionSquare;
-import MyHero_Mobs.RegionsManager.RegionPoint;
 import cn.nukkit.level.Level;
 import cn.nukkit.math.Vector2;
 

@@ -8,8 +8,8 @@ import java.util.Map;
 import java.util.Random;
 
 import MyHero_Core.Core.MyHeroMain;
+import MyHero_Core.Regions.Region;
 import MyHero_Mobs.MobManager.MyHeroMobCreator;
-import MyHero_Mobs.RegionsManager.Region;
 import cn.nukkit.Player;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.math.Vector3;
