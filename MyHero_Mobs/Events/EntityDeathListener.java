@@ -16,8 +16,8 @@ import cn.nukkit.event.entity.EntityDeathEvent;
 import cn.nukkit.item.Item;
 import cn.nukkit.level.Level;
 import cn.nukkit.level.Location;
-import de.kniffo80.mobplugin.entities.animal.Animal;
-import de.kniffo80.mobplugin.entities.monster.Monster;
+import nukkitcoders.mobplugin.entities.animal.Animal;
+import nukkitcoders.mobplugin.entities.monster.Monster;
 
 public class EntityDeathListener implements Listener{
 

@@ -1,7 +1,7 @@
 #name, main, version and api are required
 name: MyHeroMobs
 main: MyHero_Mobs.Core.MyHeroMain_Mobs
-version: "1.1"
+version: "1.11"
 api: ["1.0.5"]
 author: WindSkill
 description: Plugin MyHero Mobs for Nukkit

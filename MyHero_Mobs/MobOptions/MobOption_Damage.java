@@ -3,7 +3,7 @@ package MyHero_Mobs.MobOptions;
 import MyHero_Core.Managers.LangManager;
 import MyHero_Mobs.MobManager.AbstractMobOption;
 import MyHero_Mobs.MobManager.MobOption;
-import de.kniffo80.mobplugin.entities.monster.Monster;
+import nukkitcoders.mobplugin.entities.monster.Monster;
 
 public class MobOption_Damage extends MobOption
 {
